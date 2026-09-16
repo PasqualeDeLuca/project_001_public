@@ -1,23 +1,72 @@
 # Greed World
 
-Un RPG sandbox navale data-driven sviluppato in Unity.
+A data-driven naval sandbox RPG developed in Unity.
 
+## Overview
 
-## Panoramica
+**Greed World** is a 2D sandbox video game that combines exploration, trading, diplomacy, crew management, and tactical naval combat.
 
-Greed World è un videogioco 2D sandbox che combina esplorazione, commercio, diplomazia, gestione dell'equipaggio e combattimento navale tattico.
+The player navigates a dynamic world influenced by economic systems, diplomatic relationships, weather conditions, reputation, character behavior, and world events.
 
-Il giocatore naviga in un mondo dinamico influenzato da sistemi economici, relazioni diplomatiche, condizioni meteorologiche, reputazione e comportamenti emergenti dei personaggi. Ogni decisione contribuisce a modellare il modo in cui il mondo reagisce alle azioni del giocatore, generando esperienze uniche guidate dai sistemi di simulazione piuttosto che da eventi completamente scriptati.
+Player decisions affect how the world reacts, creating emergent gameplay experiences driven by interconnected simulation systems rather than exclusively scripted events.
 
-Il progetto è stato sviluppato interamente da me nel corso di oltre tre anni e rappresenta sia un videogioco sia un esercizio di software engineering su larga scala, con particolare attenzione ad architettura software, system design e mantenibilità del codice.
+The project has been developed entirely by me over **three years**, and represents both a video game and a large-scale software engineering project, with a strong focus on **software architecture, system design, UI engineering, data-driven development, and code maintainability**.
 
-> Sviluppato individualmente per oltre 3 anni con un forte focus su UI Engineering, Data-Driven Architecture, System Design e pattern software scalabili.
+> Developed independently for over 3 years, with a strong focus on UI Engineering, Data-Driven Architecture, System Design, and scalable software patterns.
 
 ---
 
-## Architettura Software
+## Features
 
-Il progetto adotta un'architettura a layer progettata per separare responsabilità, logica di business, accesso ai dati e persistenza.
+- Open-ended 2D naval sandbox gameplay
+- Exploration and dynamic world simulation
+- Dynamic economy and trading
+- Tactical turn-based naval combat
+- Crew management and morale
+- Character personalities and behavioral traits
+- Diplomatic relationships between characters and kingdoms
+- Reputation-driven interactions
+- Data-driven quest and dialogue systems
+- Dynamic weather simulation
+- Global crisis events
+- Autonomous AI activities
+- Runtime entity database
+- JSON-based content database
+- Custom save/load and persistence system
+- Custom UI framework and reusable UI components
+- Custom development and debugging tools
+
+---
+
+## Technology Stack
+
+### Core Technologies
+
+- **Unity**
+- **C#**
+- **JSON**
+- **Newtonsoft.Json**
+- **Odin Serializer**
+
+### Architecture & Design
+
+- Data-Driven Architecture
+- Repository Pattern
+- Dependency Injection
+- Event-Driven Architecture
+- Runtime Entity Database
+- Serializable Domain Models
+- MVC
+- MVVM
+- ECS
+- State Machines
+- Separation of Concerns
+
+---
+
+## Software Architecture
+
+The project follows a layered architecture designed to separate responsibilities, business logic, data access, and persistence.
 
 ```text
 UI
@@ -31,9 +80,9 @@ Repositories
 Data
 ```
 
-La codebase è composta da centinaia di script C#, decine di migliaia di righe di codice e decine di sistemi interconnessi.
+The codebase consists of **hundreds of C# scripts, tens of thousands of lines of code, and dozens of interconnected systems**.
 
-### Principi Architetturali
+### Architectural Principles
 
 - Data-Driven Architecture
 - Repository-Based Architecture
@@ -44,201 +93,232 @@ La codebase è composta da centinaia di script C#, decine di migliaia di righe d
 - Dependency Injection
 - Separation of Concerns
 
+The architecture is designed to minimize coupling between systems and make individual components easier to maintain, test, and extend.
+
 ---
 
-## Sistemi Principali
+## Core Systems
 
 ### Data Management System
 
-Sistema di persistenza personalizzato basato su modelli serializzabili.
+A custom persistence system based on serializable domain models.
 
-Funzionalità principali:
+Key features:
 
-- Salvataggio e caricamento dati
-- Versionamento dei salvataggi
-- Serializzazione JSON
-- Cifratura opzionale dei dati
-- Gestione modulare dei file
-- Persistenza dello stato runtime
+- Save and load system
+- Save versioning
+- JSON serialization
+- Optional data encryption
+- Modular file management
+- Runtime state persistence
+
+---
 
 ### Entity Repository
 
-Database centrale delle entità utilizzato per indicizzare e recuperare dati tramite identificatori univoci.
+A centralized runtime entity database used to index and retrieve game entities through unique identifiers.
 
-Caratteristiche:
+Key features:
 
-- Lookup generico delle entità
-- Recupero tipizzato dei dati
-- Caching runtime
-- Comunicazione disaccoppiata tra sistemi
-- Implementazione del Repository Pattern
+- Generic entity lookup
+- Strongly typed data retrieval
+- Runtime caching
+- Decoupled communication between systems
+- Repository Pattern implementation
 
-Questo approccio consente ai sistemi di comunicare tramite ID anziché riferimenti diretti, riducendo significativamente l'accoppiamento tra moduli.
+Systems communicate through entity identifiers rather than direct object references, significantly reducing coupling between modules.
+
+---
 
 ### Economy & Trading System
 
-Sistema economico dinamico che regola il valore delle merci in base alle condizioni del mondo di gioco.
+A dynamic economic system that determines the value of goods based on the current state of the game world.
 
-Funzionalità:
+Features include:
 
-- Prezzi dinamici
-- Rotte commerciali
-- Gestione del carico
-- Interazioni commerciali
-- Fluttuazioni di mercato
+- Dynamic pricing
+- Trading routes
+- Cargo management
+- Trading interactions
+- Market fluctuations
+
+---
 
 ### Diplomatic System
 
-Gestisce le relazioni tra:
+Manages relationships between different entities:
 
-- Personaggio → Personaggio
-- Personaggio → Regno
-- Regno → Regno
+- Character → Character
+- Character → Kingdom
+- Kingdom → Kingdom
 
-Le relazioni influenzano missioni, opportunità commerciali, conflitti ed eventi del mondo.
+Diplomatic relationships can influence quests, trading opportunities, conflicts, and world events.
+
+---
 
 ### Personality System
 
-I personaggi sviluppano tratti comportamentali in base alle azioni compiute durante il gioco.
+Characters develop behavioral traits based on actions and events occurring throughout the game.
 
-Esempi:
+Examples include:
 
-- Avidità
-- Onore
-- Crudeltà
-- Coraggio
-- Ambizione
+- Greed
+- Honor
+- Cruelty
+- Courage
+- Ambition
 
-Questi tratti influenzano decisioni dell'IA, diplomazia e reazioni del mondo.
+These traits influence AI decisions, diplomacy, and character reactions to the world.
+
+---
 
 ### Knowledge System
 
-Sistema di gestione della conoscenza che distingue tra:
+A knowledge-management system that distinguishes between different types of information:
 
-- Esperienza diretta
-- Voci e dicerie
-- Informazioni condivise
+- Direct experience
+- Rumors
+- Shared information
 
-Le informazioni possono deteriorarsi nel tempo, introducendo incertezza e incentivando l'esplorazione.
+Information can deteriorate over time, introducing uncertainty and encouraging exploration and information gathering.
+
+---
 
 ### Crew Management System
 
-Simula la vita a bordo di una nave.
+Simulates life aboard a ship.
 
-Funzionalità:
+Features include:
 
-- Consumo di viveri
-- Gestione del morale
-- Requisiti dell'equipaggio
-- Fedeltà dei marinai
-- Ammutinamenti
+- Food and supply consumption
+- Morale management
+- Crew requirements
+- Sailor loyalty
+- Mutinies
+
+---
 
 ### Weather System
 
-Sistema meteorologico che influenza navigazione, commercio, incontri ed esplorazione.
+A dynamic weather system that affects navigation, trading, encounters, and exploration.
+
+---
 
 ### Crisis System
 
-Gestisce eventi globali in grado di modificare condizioni economiche, politiche e sociali del mondo di gioco.
+Manages global events capable of changing the economic, political, and social conditions of the game world.
+
+---
 
 ### Quest System
 
-Architettura data-driven per la gestione delle missioni.
+A data-driven architecture for managing quests and missions.
 
-Supporta:
+Supports:
 
-- Obiettivi
-- Prerequisiti
-- Ricompense
-- Progressione guidata da eventi
+- Objectives
+- Prerequisites
+- Rewards
+- Event-driven progression
+
+---
 
 ### Dialogue System
 
-Sistema di dialogo integrato con reputazione, diplomazia e stato del mondo.
+A dialogue system integrated with reputation, diplomacy, and the current state of the world.
+
+---
 
 ### AI System
 
-Sistema di simulazione comportamentale delle fazioni.
+A behavioral simulation system for autonomous characters and factions.
 
-Gestisce:
+AI systems can handle:
 
-- Commercio
-- Pattugliamento
-- Ricerca di bersagli
-- Evitamento delle minacce
-- Navigazione strategica
-- Attività autonome del mondo
+- Trading
+- Patrolling
+- Target searching
+- Threat avoidance
+- Strategic navigation
+- Autonomous world activities
+
+This allows parts of the game world to continue operating independently of direct player interaction.
+
+---
 
 ### Battle System
 
-Sistema di combattimento navale a turni basato su griglia esagonale.
+A turn-based naval combat system based on a **hexagonal grid**.
 
-Funzionalità:
+Features include:
 
-- Posizionamento tattico
-- Gestione della gittata dei cannoni
-- Pianificazione del movimento
-- Orientamento della nave
-- Combattimenti nave contro nave
+- Tactical positioning
+- Cannon range management
+- Movement planning
+- Ship orientation
+- Ship-to-ship combat
 
-Il posizionamento e l'angolo di attacco rappresentano elementi fondamentali della strategia.
+Positioning and attack angles are fundamental elements of the combat strategy.
 
 ---
 
 ## Front-End & UI Engineering
 
-L'intera interfaccia utente è stata progettata e sviluppata da me.
+The entire user interface has been designed and implemented by me.
 
-Funzionalità implementate:
+The UI includes:
 
 - Data Binding
-- Tooltip dinamici
-- Finestre modali
-- Drag & Drop
-- Liste dinamiche
-- Ordinamenti
-- Filtri
-- Menu contestuali
-- Flussi UI complessi
+- Dynamic tooltips
+- Modal windows
+- Drag & Drop interactions
+- Dynamic lists
+- Sorting
+- Filtering
+- Context menus
+- Complex UI flows
 
-L'architettura della UI segue principi MVC e MVVM per mantenere una chiara separazione tra presentazione e logica applicativa.
+The UI architecture follows **MVC and MVVM principles** to maintain a clear separation between presentation logic and application logic.
 
 ---
 
-## Gestione dei Dati
+## Data Management
 
-Greed World utilizza un'architettura di persistenza a doppio livello.
+Greed World uses a two-level data architecture that separates static game content from dynamic runtime state.
 
 ### Static JSON Repository
 
-I contenuti statici del gioco sono archiviati in file JSON e caricati in modelli serializzabili fortemente tipizzati.
+Static game content is stored in JSON files and loaded into strongly typed serializable models.
 
-Esempi:
+Examples include:
 
-- Oggetti
-- Navi
-- Città
-- Regni
-- Classi
-- Missioni
-- Effetti
+- Items
+- Ships
+- Cities
+- Kingdoms
+- Classes
+- Quests
+- Effects
+
+This approach allows game content to be modified independently from the core gameplay systems.
 
 ### Runtime Entity Database
 
-Lo stato dinamico della partita viene gestito tramite repository runtime dedicati.
+Dynamic game state is managed through dedicated runtime repositories.
 
-Vantaggi:
+Advantages include:
 
-- Scalabilità
-- Manutenibilità
-- Recupero efficiente dei dati
-- Separazione tra contenuti e stato della partita
+- Scalability
+- Maintainability
+- Efficient data retrieval
+- Separation between content and runtime state
+- Reduced coupling between systems
 
 ---
 
 ## Design Patterns
 
-Durante lo sviluppo sono stati utilizzati numerosi pattern software:
+Several software design patterns and architectural approaches have been used throughout development:
 
 - Singleton
 - Observer / Event Bus
@@ -254,42 +334,25 @@ Durante lo sviluppo sono stati utilizzati numerosi pattern software:
 - ECS
 - Data-Driven Design
 
----
-
-## Strumenti di Sviluppo
-
-Per velocizzare lo sviluppo e migliorare il debugging sono stati realizzati strumenti interni dedicati.
-
-Tra questi:
-
-- Editor Windows personalizzate
-- Tool di debug e visualizzazione runtime
-- Generatori automatici di dati
-- Utility di ispezione e testing
+The patterns are used according to the responsibilities of individual systems rather than as a rigid framework, with the goal of keeping the codebase modular and maintainable.
 
 ---
 
-## Tecnologie
+## Development Tools
 
-- Unity
-- C#
-- JSON Serialization
-- Newtonsoft Json
-- Odin Serializer
+Custom internal tools have been developed to improve development speed, debugging, testing, and data management.
 
-Architettura e Design:
+These include:
 
-- MVC
-- MVVM
-- ECS
-- Repository Pattern
-- Dependency Injection
-- Event-Driven Architecture
-- Data-Driven Design
+- Custom Unity Editor windows
+- Runtime debugging and visualization tools
+- Automated data generators
+- Inspection utilities
+- Testing utilities
 
 ---
 
-## Screenshot
+## Screenshots
 
 <p align="center">
   <img width="450" alt="Screenshot #1" src="https://github.com/user-attachments/assets/e98a0dad-4fc9-4773-8747-82ceaae00930" />
@@ -301,16 +364,26 @@ Architettura e Design:
 
 ---
 
-## Stato del Progetto
+## Project Status
 
-Il progetto è attualmente in sviluppo attivo.
+The project is currently under active development.
 
-La versione corrente include un prototipo giocabile e continua a essere utilizzata come piattaforma di sperimentazione per architetture software, UI engineering e system design.
+The current version includes a playable prototype and continues to serve as a platform for experimenting with:
+
+- Software architecture
+- UI engineering
+- Data-driven systems
+- System design
+- Game AI
+- Simulation systems
+- Scalable software patterns
 
 ---
 
-## Codice Sorgente
+## Source Code
 
-Il codice sorgente è mantenuto in una repository privata.
+The source code is maintained in a private repository.
 
-Questa repository pubblica esiste come vetrina del progetto e documentazione delle soluzioni architetturali, dei sistemi sviluppati e dei concetti di software engineering esplorati durante lo sviluppo.
+This public repository serves as a **project showcase and technical documentation** of the architecture, systems, development practices, and software engineering concepts explored throughout the development of Greed World.
+
+The repository focuses on documenting the technical challenges and architectural solutions rather than exposing the complete source code.
